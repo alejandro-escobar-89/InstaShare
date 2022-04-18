@@ -44,6 +44,7 @@
                 border-radius: 5px;
                 padding: 1em;
                 margin-bottom: 2.5em;
+                overflow: auto;
             }
 
             .gray-container p {
