@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
+	
+	protected $casts = [
+        'created_at' => 'date:m/d/Y',
+    ];
 
-    protected $fillable = ['name', 'data', 'compressed'];
+    protected $fillable = ['name', 'content', 'ext', 'mime', 'owner'];
 }

@@ -16,8 +16,11 @@ class FileFactory extends Factory
     {
         return [
             'name'       => Str::of($this->faker->sentence())->rtrim('.'),
-            'data'       => $this->faker->sha256(),
+            'content'    => $this->faker->sha256(),
+            'ext'        => $this->faker->fileExtension(),
+            'mime'       => $this->faker->mimeType(),
             'compressed' => $this->faker->boolean(),
+            'owner'      => $this->faker->numberBetween(1),
         ];
     }
 }
