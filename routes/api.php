@@ -9,9 +9,30 @@ Route::post('/tokens/create', function (Request $request) {
     return ['token' => $token->plainTextToken];
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('/user/files', function (Request $request) {
+        return $request->user()->files;
+    });
+
+    Route::name('files.')->group(function () {
+        Route::controller(FileController::class)->group(function () {
+            Route::get('/files/owner/{user}', 'getFilesByOwner')->name('by_owner');
+            Route::get('/files/', 'store')->name('store');
+            Route::post('/files', 'store')->name('store');
+            Route::match(['put', 'patch'], '/files/{file}', 'update')->name('update');
+            Route::delete('/files/{file}', 'destroy')->name('destroy');
+        });
+    });
 });
 
-Route::apiResource('files', FileController::class);
-Route::get('files/download/{file}', [FileController::class, 'download'])->name('files.download');
+Route::name('files.')->group(function () {
+    Route::controller(FileController::class)->group(function () {
+        Route::get('/files', 'index')->name('index');
+        Route::get('files/download/{file}', 'download')->name('download');
+        Route::get('/files/{file}', 'show')->name('show');
+    });
+});

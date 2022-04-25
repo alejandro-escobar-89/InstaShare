@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
@@ -19,11 +18,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        /**
-         * Return only the necesary fields. Eg: the 'content' field would impact the load time
-         * unnecessarily, since (in this demo) the actual files won't be displayed to the user.
-         */
-        return File::all('id', 'name', 'ext', 'mime', 'compressed', 'owner', 'created_at');
+        return File::all();
     }
 
     /**
@@ -86,23 +81,11 @@ class FileController extends Controller
      *
      * @param File $file
      *
-     * @return JsonResponse
+     * @return Response
      */
     public function show(File $file)
     {
-        /**
-         * Return only the necesary fields. Eg: the 'content' field would impact the load time
-         * unnecessarily, since (in this demo) the actual files won't be displayed to the user.
-         */
-        return response()->json([
-            'id'         => $file->id,
-            'name'       => $file->name,
-            'ext'        => $file->ext,
-            'mime'       => $file->mime,
-            'compressed' => $file->compressed,
-            'owner'      => $file->owner,
-            'created_at' => $file->created_at,
-        ]);
+        return response()->json($file->load('owner:id,name'));
     }
 
     /**
