@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Queue\Events\JobProcessed;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Queue::after(function (JobProcessed $event) {
+            // $event->job->payload()
+
+            // Broadcast notifiaction to the front end.
+        });
     }
 }

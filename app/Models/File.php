@@ -14,7 +14,7 @@ class File extends Model
         'created_at' => 'date:m/d/Y',
     ];
 
-    protected $fillable = ['name', 'content', 'ext', 'mime', 'owner'];
+    protected $fillable = ['name', 'content', 'ext', 'owner'];
 
     /**
      * The 'content' field, which hold the file's actual binary data, will be hidden

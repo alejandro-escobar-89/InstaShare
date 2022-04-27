@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\CompressDatabaseFile;
 use App\Models\File;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
@@ -44,7 +46,6 @@ class FileController extends Controller
             'name'    => $request->filled('name') ? $request->input('name') : $name,
             'content' => $content,
             'ext'     => strtolower($content->getClientOriginalExtension()),
-            'mime'    => $content->getMimeType(),
             'owner'   => $request->user()->id,
         ];
 
@@ -62,7 +63,7 @@ class FileController extends Controller
             ], 400);
         }
 
-        // Convert the file contents to hexadecimal in order to accomodate the BYTEA Postgres type.
+        // Convert the file contents to hexadecimal in order to accomodate the BYTEA Postgres type
         try {
             $data['content'] = bin2hex($content->get());
         } catch (FileNotFoundException $e) {
@@ -71,7 +72,8 @@ class FileController extends Controller
             ], 500);
         }
 
-        File::create($data);
+        $file = File::create($data);
+        CompressDatabaseFile::dispatch($file);
 
         return response()->json(null, 201);
     }
@@ -117,14 +119,20 @@ class FileController extends Controller
      */
     public function download(File $file)
     {
+        if (!$file->compressed) {
+            response()->json([
+                'message' => 'The file has not finished compressing on the serveer side',
+            ], 500);
+        }
+
         /**
          * Convert the hexadecimal value of the file contents (as stored in the DB)
          * back to its binary form, and prepare the response for download.
          */
         return response(hex2bin(stream_get_contents($file->content)))
-            ->header('Content-Type', $file->mime)
+            ->header('Content-Type', 'application/zip')
             ->header('Content-Description', 'File Transfer')
-            ->header('Content-Disposition', 'attachment; filename="' . "{$file->name}.{$file->ext}" . '";')
+            ->header('Content-Disposition', 'attachment; filename="' . "{$file->name}.zip" . '";')
             ->header('Content-Transfer-Encoding', 'binary')
             ->header('Cache-Control', 'no-cache private')
             ->header('Expires', 0);

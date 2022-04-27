@@ -15,6 +15,6 @@ class FileSeeder extends Seeder
     public function run()
     {
         File::truncate();
-        File::factory(9)->create();
+        File::factory(10)->create();
     }
 }

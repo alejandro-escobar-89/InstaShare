@@ -18,7 +18,6 @@ class CreateFilesTable extends Migration
             $table->string('name', 260);
             $table->binary('content');
             $table->string('ext', 260);
-            $table->string('mime', 260);
             $table->boolean('compressed')->default(false);
             $table->integer('owner');
             $table->timestamps();
