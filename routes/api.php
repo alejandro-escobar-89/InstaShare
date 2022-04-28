@@ -15,7 +15,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::get('/user/files', function (Request $request) {
-        return $request->user()->files;
+        return $request->user()->files->sortBy('created_at')->all();
     });
 
     Route::name('files.')->group(function () {

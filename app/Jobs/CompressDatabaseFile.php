@@ -72,7 +72,7 @@ class CompressDatabaseFile implements ShouldQueue
         // Clean up the temp files afterwards
         Storage::delete([$temp_file_name, $zip_file_name]);
 
-        // Update the File model and put it back in the storage
+        // Update the File model and put it back in the storage (this will trigger a FileUpdated event)
         $this->file->content = $zip_content;
         $this->file->compressed = true;
         $this->file->save();

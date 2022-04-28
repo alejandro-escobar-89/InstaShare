@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\BroadcastsEvents;
 
 class File extends Model
 {
-    use HasFactory;
+    use HasFactory, BroadcastsEvents;
 	
 	protected $casts = [
         'created_at' => 'date:m/d/Y',
@@ -31,4 +33,27 @@ class File extends Model
     public function owner() {
         return $this->belongsTo(User::class, 'owner');
     }
+
+    /**
+     * Get the channels that model events should broadcast on.
+     *
+     * @param string $event
+     *
+     * @return Channel|array
+     */
+    public function broadcastOn()
+    {
+        return [new Channel('files')];
+    }
+
+    /**
+     * Get the data to broadcast for the model.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        return ['file' => $this->load('owner:id,name')];
+    }
+
 }

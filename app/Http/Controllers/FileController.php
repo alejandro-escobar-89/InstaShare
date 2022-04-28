@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Jobs\CompressDatabaseFile;
 use App\Models\File;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
@@ -20,7 +19,7 @@ class FileController extends Controller
      */
     public function index()
     {
-        return File::all();
+        return File::orderBy('created_at')->get();
     }
 
     /**
