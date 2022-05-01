@@ -25,13 +25,21 @@ class File extends Model
      */
     protected $hidden = ['content', 'updated_at'];
 
+    protected $appends = ['size'];
+
     /**
      * Get the user that owns this file.
      *
      * @return BelongsTo
      */
-    public function owner() {
+    public function owner()
+    {
         return $this->belongsTo(User::class, 'owner');
+    }
+
+    public function getSizeAttribute()
+    {
+        return strlen(hex2bin(stream_get_contents($this->content)));
     }
 
     /**

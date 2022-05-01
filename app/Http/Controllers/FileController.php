@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Jobs\CompressDatabaseFile;
 use App\Models\File;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 
 class FileController extends Controller
 {
@@ -49,7 +51,7 @@ class FileController extends Controller
         ];
 
         $validation = Validator::make($data, [
-            'name'    => 'required|string',
+            'name'    => 'required|string|unique:files',
             'content' => "required|file|max:$max_upload_size",
         ], [
             'content.max' => "The file size must not exceed $max_upload_size KB",
@@ -100,7 +102,11 @@ class FileController extends Controller
     public function update(Request $request, File $file)
     {
         $validated = $request->validate([
-            'name' => 'required|string',
+            'name' => [
+                'required',
+                'string',
+                Rule::unique('files')->ignore($file),
+            ],
         ]);
 
         $file->name = $validated['name'];

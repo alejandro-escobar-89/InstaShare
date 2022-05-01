@@ -96,7 +96,7 @@
                 </table>
             </div>
 
-            <p><strong>Note:</strong> If the response fails due to a server error, a 500/503 status code will be returned. If a resource is not found, a 404 status code will be returned.</p>
+            <p><strong>Note:</strong> If the response fails due to a server error, a <em>500</em>/<em>503</em> status code will be returned. If there's an input error on the user side, a <em>400</em> status code will be returned, and a <em>404</em> in case a resource isn't found. <em>401</em> and <em>403</em> status codes will be returned in case there's an unauthorized access to a page or the current user doesn't have permission to access the specified resource.</p>
         </main>
     </body>
 </html>

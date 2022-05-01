@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -19,7 +20,7 @@ class FileFactory extends Factory
             'content'    => $this->faker->sha256(),
             'ext'        => $this->faker->fileExtension(),
             'compressed' => $this->faker->boolean(),
-            'owner'      => $this->faker->numberBetween(1),
+            'owner'      => $this->faker->randomElement(User::all())['id'],
         ];
     }
 }
