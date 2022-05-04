@@ -39,7 +39,13 @@ class File extends Model
 
     public function getSizeAttribute()
     {
-        return strlen(hex2bin(stream_get_contents($this->content)));
+        if (gettype($this->content) == 'resource') {
+            return strlen(hex2bin(stream_get_contents($this->content)));
+        } elseif (gettype($this->content) == 'string') {
+            return strlen($this->content);
+        } else {
+            return -1;
+        }
     }
 
     /**

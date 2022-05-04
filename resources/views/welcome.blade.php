@@ -82,16 +82,18 @@
                     </thead>
 
                     <tbody>
-                        <tr> <td>Registration</td>                         <td>POST</td>        <td>register</td>            <td>200</td> <td>{{ env('APP_URL') . '/register' }}</td>            </tr>
-                        <tr> <td>Create a CSRF cookie before login</td>    <td>GET | HEAD</td>  <td>sanctum/csrf-cookie</td> <td>200</td> <td>{{ env('APP_URL') . '/sanctum/csrf-cookie' }}</td> </tr>
-                        <tr> <td>Login</td>                                <td>POST</td>        <td>login</td>               <td>200</td> <td>{{ env('APP_URL') . '/login' }}</td>               </tr>
-                        <tr> <td>Logout</td>                               <td>POST</td>        <td>logout</td>              <td>200</td> <td>{{ env('APP_URL') . '/logout' }}</td>              </tr>
-                        <tr> <td>Obtain current user's data</td>           <td>GET | HEAD</td>  <td>api/user</td>            <td>200</td> <td>{{ env('APP_URL') . '/api/user' }}</td>            </tr>
-                        <tr> <td>List all stored files</td>                <td>GET | HEAD</td>  <td>api/files</td>           <td>200</td> <td>{{ env('APP_URL') . '/api/files' }}</td>           </tr>
-                        <tr> <td>Upload a new file</td>                    <td>POST</td>        <td>api/files</td>           <td>201</td> <td>{{ env('APP_URL') . '/api/files' }}</td>           </tr>
-                        <tr> <td>Obtain the specified file's data</td>     <td>GET | HEAD</td>  <td>api/files/{file_id}</td> <td>200</td> <td>{{ env('APP_URL') . '/api/files/123' }}</td>       </tr>
-                        <tr> <td>Update the specified file's metadata</td> <td>PUT | PATCH</td> <td>api/files/{file_id}</td> <td>200</td> <td>{{ env('APP_URL') . '/api/files/456' }}</td>       </tr>
-                        <tr> <td>Delete the specified file</td>            <td>DELETE</td>      <td>api/files/{file_id}</td> <td>204</td> <td>{{ env('APP_URL') . '/api/files/789' }}</td>       </tr>
+                        <tr> <td>Create a CSRF cookie before login</td>      <td>GET | HEAD</td>  <td>sanctum/csrf-cookie</td>          <td>204</td> <td>{{ env('APP_URL') . '/sanctum/csrf-cookie' }}</td> </tr>
+                        <tr> <td>Registration</td>                           <td>POST</td>        <td>register</td>                     <td>201</td> <td>{{ env('APP_URL') . '/register' }}</td>            </tr>
+                        <tr> <td>Login</td>                                  <td>POST</td>        <td>login</td>                        <td>200</td> <td>{{ env('APP_URL') . '/login' }}</td>               </tr>
+                        <tr> <td>Logout</td>                                 <td>POST</td>        <td>logout</td>                       <td>200</td> <td>{{ env('APP_URL') . '/logout' }}</td>              </tr>
+                        <tr> <td>Obtain current user's data</td>             <td>GET | HEAD</td>  <td>api/user</td>                     <td>200</td> <td>{{ env('APP_URL') . '/api/user' }}</td>            </tr>
+                        <tr> <td>Obtain files owned by the current user</td> <td>GET | HEAD</td>  <td>api/user/files</td>               <td>200</td> <td>{{ env('APP_URL') . '/api/user' }}</td>            </tr>
+                        <tr> <td>List all stored files</td>                  <td>GET | HEAD</td>  <td>api/files</td>                    <td>200</td> <td>{{ env('APP_URL') . '/api/files' }}</td>           </tr>
+                        <tr> <td>Upload a new file</td>                      <td>POST</td>        <td>api/files</td>                    <td>201</td> <td>{{ env('APP_URL') . '/api/files' }}</td>           </tr>
+                        <tr> <td>Obtain the specified file's metadata</td>   <td>GET | HEAD</td>  <td>api/files/{file_id}</td>          <td>200</td> <td>{{ env('APP_URL') . '/api/files/123' }}</td>       </tr>
+                        <tr> <td>Update the specified file's metadata</td>   <td>PUT | PATCH</td> <td>api/files/{file_id}</td>          <td>200</td> <td>{{ env('APP_URL') . '/api/files/456' }}</td>       </tr>
+                        <tr> <td>Download the specified file</td>            <td>GET | HEAD</td>  <td>api/files/download/{file_id}</td> <td>200</td> <td>{{ env('APP_URL') . '/api/files/456' }}</td>       </tr>
+                        <tr> <td>Delete the specified file</td>              <td>DELETE</td>      <td>api/files/{file_id}</td>          <td>204</td> <td>{{ env('APP_URL') . '/api/files/789' }}</td>       </tr>
                     </tbody>
                 </table>
             </div>

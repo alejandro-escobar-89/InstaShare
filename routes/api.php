@@ -20,7 +20,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::name('files.')->group(function () {
         Route::controller(FileController::class)->group(function () {
-            Route::get('/files/owner/{user}', 'getFilesByOwner')->name('by_owner');
             Route::get('/files/', 'store')->name('store');
             Route::post('/files', 'store')->name('store');
             Route::match(['put', 'patch'], '/files/{file}', 'update')->name('update');

@@ -39,7 +39,7 @@ class FileController extends Controller
             ], 400);
         }
 
-        $max_upload_size = env('MAX_UPLOAD_SIZE', 20480);
+        $max_upload_size = env('MAX_UPLOAD_SIZE', 51200);
         $content = $request->file('content');
         $name = pathinfo($content->getClientOriginalName(), PATHINFO_FILENAME);
 
@@ -64,19 +64,29 @@ class FileController extends Controller
             ], 400);
         }
 
-        // Convert the file contents to hexadecimal in order to accomodate the BYTEA Postgres type
-        try {
-            $data['content'] = bin2hex($content->get());
-        } catch (FileNotFoundException $e) {
-            return response()->json([
-                'message' => 'There was an error processing the uploaded file',
-            ], 500);
+        if (env('DB_CONNECTION') == 'pgsql') {
+            // Convert the file contents to hexadecimal in order to accomodate the BYTEA Postgres type
+            try {
+                $data['content'] = bin2hex($content->get());
+            } catch (FileNotFoundException $e) {
+                return response()->json([
+                    'message' => 'There was an error processing the uploaded file',
+                ], 500);
+            }
+        } else {
+            try {
+                $data['content'] = $content->get();
+            } catch (FileNotFoundException $e) {
+                return response()->json([
+                    'message' => 'There was an error processing the uploaded file',
+                ], 500);
+            }
         }
 
         $file = File::create($data);
         CompressDatabaseFile::dispatch($file);
 
-        return response()->json(null, 201);
+        return response()->json($file, 201);
     }
 
     /**
@@ -112,7 +122,7 @@ class FileController extends Controller
         $file->name = $validated['name'];
         $file->save();
 
-        return response()->json();
+        return response()->json($file);
     }
 
     /**
@@ -125,16 +135,22 @@ class FileController extends Controller
     public function download(File $file)
     {
         if (!$file->compressed) {
-            response()->json([
-                'message' => 'The file has not finished compressing on the serveer side',
+            return response()->json([
+                'message' => 'The file has not finished compressing on the server side',
             ], 500);
+        }
+
+        $file_content = $file->content;
+
+        if (env('DB_CONNECTION') == 'pgsql') {
+            $file_content = hex2bin(stream_get_contents($file->content));
         }
 
         /**
          * Convert the hexadecimal value of the file contents (as stored in the DB)
          * back to its binary form, and prepare the response for download.
          */
-        return response(hex2bin(stream_get_contents($file->content)))
+        return response($file_content)
             ->header('Content-Type', 'application/zip')
             ->header('Content-Description', 'File Transfer')
             ->header('Content-Disposition', 'attachment; filename="' . "{$file->name}.zip" . '";')
