@@ -87,8 +87,8 @@
                         <tr> <td>Login</td>                                  <td>POST</td>        <td>login</td>                        <td>200</td> <td>{{ env('APP_URL') . '/login' }}</td>               </tr>
                         <tr> <td>Logout</td>                                 <td>POST</td>        <td>logout</td>                       <td>200</td> <td>{{ env('APP_URL') . '/logout' }}</td>              </tr>
                         <tr> <td>Obtain current user's data</td>             <td>GET | HEAD</td>  <td>api/user</td>                     <td>200</td> <td>{{ env('APP_URL') . '/api/user' }}</td>            </tr>
-                        <tr> <td>Obtain files owned by the current user</td> <td>GET | HEAD</td>  <td>api/user/files</td>               <td>200</td> <td>{{ env('APP_URL') . '/api/user' }}</td>            </tr>
                         <tr> <td>List all stored files</td>                  <td>GET | HEAD</td>  <td>api/files</td>                    <td>200</td> <td>{{ env('APP_URL') . '/api/files' }}</td>           </tr>
+                        <tr> <td>List files owned by the specified user</td> <td>GET | HEAD</td>  <td>api/files/owner/{user_id}</td>    <td>200</td> <td>{{ env('APP_URL') . '/api/files/owner/10' }}</td>  </tr>
                         <tr> <td>Upload a new file</td>                      <td>POST</td>        <td>api/files</td>                    <td>201</td> <td>{{ env('APP_URL') . '/api/files' }}</td>           </tr>
                         <tr> <td>Obtain the specified file's metadata</td>   <td>GET | HEAD</td>  <td>api/files/{file_id}</td>          <td>200</td> <td>{{ env('APP_URL') . '/api/files/123' }}</td>       </tr>
                         <tr> <td>Update the specified file's metadata</td>   <td>PUT | PATCH</td> <td>api/files/{file_id}</td>          <td>200</td> <td>{{ env('APP_URL') . '/api/files/456' }}</td>       </tr>

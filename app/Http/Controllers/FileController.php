@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Jobs\CompressDatabaseFile;
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
@@ -22,6 +22,18 @@ class FileController extends Controller
     public function index()
     {
         return File::orderBy('created_at')->get();
+    }
+
+    /**
+     * Display a listing of files uploaded by the specified user.
+     *
+     * @param User $user
+     *
+     * @return File[]|Collection
+     */
+    public function getFilesByOwner(User $user)
+    {
+        return File::where('owner', $user->id)->orderBy('created_at')->get();
     }
 
     /**
