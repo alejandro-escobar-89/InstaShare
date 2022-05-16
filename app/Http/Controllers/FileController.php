@@ -155,6 +155,7 @@ class FileController extends Controller
         $file_content = $file->content;
 
         if (env('DB_CONNECTION') == 'pgsql') {
+            // Convert the file contents from hexadecimal to binary if they were stored with the BYTEA Postgres type
             $file_content = hex2bin(stream_get_contents($file->content));
         }
 

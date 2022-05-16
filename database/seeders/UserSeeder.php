@@ -28,6 +28,6 @@ class UserSeeder extends Seeder
             'remember_token'    => Str::random(10),
         ]);
 
-        User::factory(2)->hasFiles(3)->create();
+        User::factory(2)->create();
     }
 }

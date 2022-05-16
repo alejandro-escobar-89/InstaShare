@@ -33,7 +33,7 @@ class FileFactory extends Factory
             'name'       => Str::of($this->faker->sentence())->rtrim('.'),
             'content'    => $file_content,
             'ext'        => $this->faker->fileExtension(),
-            'compressed' => $this->faker->boolean(),
+            'compressed' => false,
             'owner'      => $this->faker->randomElement(User::all())['id'],
         ];
     }

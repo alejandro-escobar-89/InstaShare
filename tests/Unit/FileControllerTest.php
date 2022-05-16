@@ -22,6 +22,20 @@ class FileControllerTest extends TestCase
             ]);
     }
 
+    public function testGetFilesByOwner() {
+        $user = User::factory()->hasFiles(2)->create();
+
+        $this->getJson("/api/files/owner/{$user->id}")
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure([
+                '*' => ['id', 'name', 'ext', 'compressed', 'owner', 'created_at'],
+            ])
+            ->assertJson([
+                ['owner' => $user->id],
+                ['owner' => $user->id],
+            ]);
+    }
+
     public function testStore()
     {
         $this->withoutJobs();

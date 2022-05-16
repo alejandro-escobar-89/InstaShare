@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Jobs\CompressDatabaseFile;
 use App\Models\File;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +16,10 @@ class FileSeeder extends Seeder
     public function run()
     {
         File::truncate();
-        File::factory(10)->create();
+
+        for ($i = 0; $i < 10; $i++) {
+            $file = File::factory()->create();
+            CompressDatabaseFile::dispatch($file);
+        }
     }
 }

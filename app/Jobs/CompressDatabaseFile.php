@@ -55,8 +55,12 @@ class CompressDatabaseFile implements ShouldQueue
         $temp_file_name = 'og_file_temp';
         $zip_file_name = 'zip_file_temp';
 
-        // Get the string representation of the original stored file
-        $file_binary_content = hex2bin(stream_get_contents($this->file->content));
+        if (env('DB_CONNECTION') == 'pgsql') {
+            // Convert the file contents from hexadecimal to binary if they were stored with the BYTEA Postgres type
+            $file_binary_content = hex2bin(stream_get_contents($this->file->content));
+        } else {
+            $file_binary_content = $this->file->content;
+        }
 
         // Create a temporary file to hold the original file content
         Storage::put($temp_file_name, $file_binary_content);
