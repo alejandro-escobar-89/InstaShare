@@ -7,6 +7,24 @@
         <title>InstaShare API</title>
 
         <style>
+            * {
+                scrollbar-color: #565b5d #363839;
+            }
+
+            ::selection {
+                background-color: #195daf !important;
+                color: #e6e4e1 !important;
+            }
+
+            html, body, input, textarea, select, button {
+                border-color: #7f786c;
+                color: #e6e4e1;
+            }
+
+            html, body {
+                background-color: #2f3031;
+            }
+
             body {
                 font-family: 'Arial', sans-serif;
             }
@@ -17,7 +35,7 @@
             }
 
             tr:nth-child(even) {
-                background: #d2d2d2;
+                background: rgb(69, 73, 75);
             }
 
             th {
@@ -39,8 +57,8 @@
             }
 
             .gray-container {
-                background: #e7e7e7;
-                border: 2px solid #7c7c7c;
+                background-color: rgb(59, 62, 62);
+                border: 2px solid rgb(113, 106, 97);
                 border-radius: 5px;
                 padding: 1em;
                 margin-bottom: 2.5em;
