@@ -9,7 +9,7 @@ class RegisterTest extends TestCase
 {
     public function testRequiresNameEmailAndPassword()
     {
-        $this->postJson('/register')
+        $this->postJson('/api/register')
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
@@ -25,7 +25,7 @@ class RegisterTest extends TestCase
             'password' => 'instashare',
         ];
 
-        $this->postJson('/register', $payload)
+        $this->postJson('/api/register', $payload)
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'message' => 'The given data was invalid.',
@@ -44,7 +44,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'instashare',
         ];
 
-        $this->postJson('/register', $payload)
+        $this->postJson('/api/register', $payload)
             ->assertStatus(Response::HTTP_CREATED);
     }
 }

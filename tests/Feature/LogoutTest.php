@@ -9,6 +9,6 @@ class LogoutTest extends TestCase
 {
     public function testUserCanLogout()
     {
-        $this->postjson('/logout')->assertStatus(Response::HTTP_NO_CONTENT);
+        $this->postjson('/api/logout')->assertStatus(Response::HTTP_NO_CONTENT);
     }
 }

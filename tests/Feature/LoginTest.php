@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Feature;
+namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Http\Response;
@@ -9,16 +9,9 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    public function testSanctumReturnsCSRFCookie()
-    {
-        $this->get('sanctum/csrf-cookie')
-            ->assertStatus(Response::HTTP_NO_CONTENT)
-            ->assertCookie('XSRF-TOKEN');
-    }
-
     public function testRequiresEmailAndPassword()
     {
-        $this->postJson('login')
+        $this->postJson('/api/login')
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
@@ -37,7 +30,7 @@ class LoginTest extends TestCase
             'password' => 'instashare',
         ];
 
-        $this->postJson('/login', $payload)
+        $this->postJson('/api/login', $payload)
             ->assertStatus(Response::HTTP_OK);
 
     }
