@@ -21,7 +21,8 @@ class FileControllerTest extends TestCase
             ]);
     }
 
-    public function testGetFilesByOwner() {
+    public function testGetFilesByOwner()
+    {
         $user = User::factory()->hasFiles(2)->create();
 
         $this->getJson("/api/files/owner/{$user->id}")
@@ -129,7 +130,6 @@ class FileControllerTest extends TestCase
 
         $file = File::factory()->create();
 
-        $this->delete("/api/files/{$file->id}")
-            ->assertStatus(Response::HTTP_NO_CONTENT);
+        $this->delete("/api/files/{$file->id}")->assertStatus(Response::HTTP_NO_CONTENT);
     }
 }

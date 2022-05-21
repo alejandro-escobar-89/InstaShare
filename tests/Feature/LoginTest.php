@@ -31,7 +31,7 @@ class LoginTest extends TestCase
         ];
 
         $this->postJson('/api/login', $payload)
-            ->assertStatus(Response::HTTP_OK);
-
+            ->assertStatus(Response::HTTP_OK)
+            ->assertJsonStructure(['user', 'token']);
     }
 }

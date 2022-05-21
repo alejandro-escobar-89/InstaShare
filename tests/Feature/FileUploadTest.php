@@ -24,8 +24,7 @@ class FileUploadTest extends TestCase
             'owner'   => $user->id,
         ];
 
-        $this->postJson('/api/files', $payload)
-            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $this->postJson('/api/files', $payload)->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function testFileNameHasToBeUnique()
