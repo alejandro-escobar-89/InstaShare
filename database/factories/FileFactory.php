@@ -22,7 +22,7 @@ class FileFactory extends Factory
         $content = UploadedFile::fake()->create('test-file.xyz');
 
         if (env('DB_CONNECTION') == 'pgsql') {
-            // Convert the file contents to hexadecimal in order to accomodate the BYTEA Postgres type
+            // Convert the file contents to hexadecimal in order to accommodate the BYTEA Postgres type
             $file_content = bin2hex($content->get());
         } else {
             $file_content = $content->get();

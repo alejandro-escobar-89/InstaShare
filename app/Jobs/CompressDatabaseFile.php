@@ -70,7 +70,7 @@ class CompressDatabaseFile implements ShouldQueue
         $zip->addFile(Storage::path($temp_file_name), $original_file_name);
         $zip->close();
 
-        // Get the Hex representation of the zipped file in order to accomodate the BYTEA Postgres type
+        // Get the Hex representation of the zipped file in order to accommodate the BYTEA Postgres type
         $zip_content = bin2hex(Storage::get($zip_file_name));
 
         // Clean up the temp files afterwards

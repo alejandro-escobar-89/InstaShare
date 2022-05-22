@@ -77,7 +77,7 @@ class FileController extends Controller
         }
 
         if (env('DB_CONNECTION') == 'pgsql') {
-            // Convert the file contents to hexadecimal in order to accomodate the BYTEA Postgres type
+            // Convert the file contents to hexadecimal in order to accommodate the BYTEA Postgres type
             try {
                 $data['content'] = bin2hex($content->get());
             } catch (FileNotFoundException $e) {
