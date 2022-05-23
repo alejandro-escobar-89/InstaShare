@@ -44,7 +44,6 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'instashare',
         ];
 
-        $this->postJson('/register', $payload)
-            ->assertStatus(Response::HTTP_CREATED);
+        $this->postJson('/register', $payload)->assertStatus(Response::HTTP_CREATED);
     }
 }

@@ -19,8 +19,7 @@ class FileUpdateTest extends TestCase
             'name' => 'Test file with new name',
         ];
 
-        $this->putJson("/api/files/{$file->id}", $payload)
-            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $this->putJson("/api/files/{$file->id}", $payload)->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function testFileNameIsRquired()

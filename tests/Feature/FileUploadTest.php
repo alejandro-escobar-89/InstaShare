@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Bus;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
@@ -25,8 +24,7 @@ class FileUploadTest extends TestCase
             'owner'   => $user->id,
         ];
 
-        $this->postJson('/api/files', $payload)
-            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $this->postJson('/api/files', $payload)->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 
     public function testFileNameHasToBeUnique()

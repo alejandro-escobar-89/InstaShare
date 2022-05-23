@@ -6,7 +6,6 @@ use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
@@ -22,7 +21,8 @@ class FileControllerTest extends TestCase
             ]);
     }
 
-    public function testGetFilesByOwner() {
+    public function testGetFilesByOwner()
+    {
         $user = User::factory()->hasFiles(2)->create();
 
         $this->getJson("/api/files/owner/{$user->id}")
@@ -130,7 +130,6 @@ class FileControllerTest extends TestCase
 
         $file = File::factory()->create();
 
-        $this->delete("/api/files/{$file->id}")
-            ->assertStatus(Response::HTTP_NO_CONTENT);
+        $this->delete("/api/files/{$file->id}")->assertStatus(Response::HTTP_NO_CONTENT);
     }
 }

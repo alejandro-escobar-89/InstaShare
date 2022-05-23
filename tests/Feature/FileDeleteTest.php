@@ -12,7 +12,6 @@ class FileDeleteTest extends TestCase
     {
         $file = File::factory()->create();
 
-        $this->deleteJson("/api/files/{$file->id}")
-            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+        $this->deleteJson("/api/files/{$file->id}")->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 }

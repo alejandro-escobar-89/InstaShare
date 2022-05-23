@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Feature;
+namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Http\Response;
@@ -37,8 +37,7 @@ class LoginTest extends TestCase
             'password' => 'instashare',
         ];
 
-        $this->postJson('/login', $payload)
-            ->assertStatus(Response::HTTP_OK);
+        $this->postJson('/login', $payload)->assertStatus(Response::HTTP_OK);
 
     }
 }

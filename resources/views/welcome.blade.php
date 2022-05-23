@@ -104,7 +104,7 @@
                         <tr> <td>Registration</td>                           <td>POST</td>        <td>register</td>                     <td>201</td> <td>{{ env('APP_URL') . '/register' }}</td>            </tr>
                         <tr> <td>Login</td>                                  <td>POST</td>        <td>login</td>                        <td>200</td> <td>{{ env('APP_URL') . '/login' }}</td>               </tr>
                         <tr> <td>Logout</td>                                 <td>POST</td>        <td>logout</td>                       <td>200</td> <td>{{ env('APP_URL') . '/logout' }}</td>              </tr>
-                        <tr> <td>Obtain current user's data</td>             <td>GET | HEAD</td>  <td>api/user</td>                     <td>200</td> <td>{{ env('APP_URL') . '/api/user' }}</td>            </tr>
+                        <tr> <td>Obtain authenticated user's data</td>       <td>GET | HEAD</td>  <td>api/user</td>                     <td>200</td> <td>{{ env('APP_URL') . '/api/user' }}</td>            </tr>
                         <tr> <td>List all stored files</td>                  <td>GET | HEAD</td>  <td>api/files</td>                    <td>200</td> <td>{{ env('APP_URL') . '/api/files' }}</td>           </tr>
                         <tr> <td>List files owned by the specified user</td> <td>GET | HEAD</td>  <td>api/files/owner/{user_id}</td>    <td>200</td> <td>{{ env('APP_URL') . '/api/files/owner/10' }}</td>  </tr>
                         <tr> <td>Upload a new file</td>                      <td>POST</td>        <td>api/files</td>                    <td>201</td> <td>{{ env('APP_URL') . '/api/files' }}</td>           </tr>
@@ -116,7 +116,7 @@
                 </table>
             </div>
 
-            <p><strong>Note:</strong> If the response fails due to a server error, a <em>500</em>/<em>503</em> status code will be returned. If there's an input error on the user side, a <em>400</em> status code will be returned, and a <em>404</em> in case a resource isn't found. <em>401</em> and <em>403</em> status codes will be returned in case there's an unauthorized access to a page or the current user doesn't have permission to access the specified resource.</p>
+            <p><strong>Note:</strong> If the response fails due to a server error, a <em>500</em>/<em>503</em> status code will be returned. If there's an input error on the user side, a <em>400/422</em> status code will be returned, and a <em>404</em> in case a resource isn't found. <em>401</em> and <em>403</em> status codes will be returned in case there's an unauthorized access to a page or the current user doesn't have permission to access the specified resource.</p>
         </main>
     </body>
 </html>

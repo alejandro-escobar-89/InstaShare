@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class FileFactory extends Factory
@@ -23,7 +22,7 @@ class FileFactory extends Factory
         $content = UploadedFile::fake()->create('test-file.xyz');
 
         if (env('DB_CONNECTION') == 'pgsql') {
-            // Convert the file contents to hexadecimal in order to accomodate the BYTEA Postgres type
+            // Convert the file contents to hexadecimal in order to accommodate the BYTEA Postgres type
             $file_content = bin2hex($content->get());
         } else {
             $file_content = $content->get();
