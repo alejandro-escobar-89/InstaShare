@@ -8,8 +8,8 @@ use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Bus;
-use Laravel\Sanctum\HasApiTokens;
-use Laravel\Sanctum\Sanctum;
+use Laravel\Passport\Passport;
+use Laravel\Passport\HasApiTokens;
 use Tests\TestCase;
 
 class FileUploadTest extends TestCase
@@ -34,7 +34,7 @@ class FileUploadTest extends TestCase
         /**
          * @var HasApiTokens $user
          */
-        Sanctum::actingAs($user);
+        Passport::actingAs($user);
 
         File::factory()->create([
             'name' => 'Test file',
@@ -60,7 +60,7 @@ class FileUploadTest extends TestCase
         /**
          * @var HasApiTokens $user
          */
-        Sanctum::actingAs($user);
+        Passport::actingAs($user);
 
         $payload = [
             'name'    => 'Test file',
@@ -83,7 +83,7 @@ class FileUploadTest extends TestCase
         /**
          * @var HasApiTokens $user
          */
-        Sanctum::actingAs($user);
+        Passport::actingAs($user);
 
         $payload = [
             'name'    => 'Test file',
@@ -107,7 +107,7 @@ class FileUploadTest extends TestCase
         /**
          * @var HasApiTokens $user
          */
-        Sanctum::actingAs($user);
+        Passport::actingAs($user);
 
         $payload = [
             'name'    => 'Test file',

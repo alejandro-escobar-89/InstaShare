@@ -5,8 +5,8 @@ namespace Tests\Feature;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Response;
-use Laravel\Sanctum\HasApiTokens;
-use Laravel\Sanctum\Sanctum;
+use Laravel\Passport\Passport;
+use Laravel\Passport\HasApiTokens;
 use Tests\TestCase;
 
 class FileUpdateTest extends TestCase
@@ -29,7 +29,7 @@ class FileUpdateTest extends TestCase
         /**
          * @var HasApiTokens $user
          */
-        Sanctum::actingAs($user);
+        Passport::actingAs($user);
 
         $file = File::factory()->create();
 
@@ -53,7 +53,7 @@ class FileUpdateTest extends TestCase
         /**
          * @var HasApiTokens $user
          */
-        Sanctum::actingAs($user);
+        Passport::actingAs($user);
 
         $file_1 = File::factory()->create();
 
