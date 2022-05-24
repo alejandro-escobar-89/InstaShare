@@ -100,9 +100,9 @@
                     </thead>
 
                     <tbody>
-                        <tr> <td>Registration</td>                           <td>POST</td>        <td>/register</td>                 <td>201</td> <td>{{ env('APP_URL') . '/api/register' }}</td>            </tr>
-                        <tr> <td>Login</td>                                  <td>POST</td>        <td>/login</td>                    <td>200</td> <td>{{ env('APP_URL') . '/api/login' }}</td>               </tr>
-                        <tr> <td>Logout</td>                                 <td>POST</td>        <td>/logout</td>                   <td>200</td> <td>{{ env('APP_URL') . '/api/logout' }}</td>              </tr>
+                        <tr> <td>Registration</td>                           <td>POST</td>        <td>/register</td>                 <td>201</td> <td>{{ env('APP_URL') . '/api/register' }}</td>        </tr>
+                        <tr> <td>Login</td>                                  <td>POST</td>        <td>/login</td>                    <td>200</td> <td>{{ env('APP_URL') . '/api/login' }}</td>           </tr>
+                        <tr> <td>Logout</td>                                 <td>POST</td>        <td>/logout</td>                   <td>200</td> <td>{{ env('APP_URL') . '/api/logout' }}</td>          </tr>
                         <tr> <td>Obtain the authenticated user's data</td>   <td>GET | HEAD</td>  <td>/user</td>                     <td>200</td> <td>{{ env('APP_URL') . '/api/user' }}</td>            </tr>
                         <tr> <td>List all stored files</td>                  <td>GET | HEAD</td>  <td>/files</td>                    <td>200</td> <td>{{ env('APP_URL') . '/api/files' }}</td>           </tr>
                         <tr> <td>List files owned by the specified user</td> <td>GET | HEAD</td>  <td>/files/owner/{user_id}</td>    <td>200</td> <td>{{ env('APP_URL') . '/api/files/owner/10' }}</td>  </tr>
